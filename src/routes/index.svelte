@@ -1,5 +1,8 @@
 <script>
-	import { First } from '$lib';
+	import { First, VehicleSearch } from '$lib';
 </script>
 
-<First name="World" textColor="yellowgreen" />
+<div>
+	<First name="World" textColor="yellowgreen" />
+	<VehicleSearch />
+</div>
