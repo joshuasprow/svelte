@@ -1,6 +1,8 @@
 <script lang="ts">
+	import 'bulma/css/bulma.min.css';
 	import { fetchInventory, Vehicle } from '$lib/utils/fetch-inventory';
 	import YearSelect from '$lib/vehicle-search/YearSelect.svelte';
+	import LocationSelect from './LocationSelect.svelte';
 
 	let locationId: undefined;
 	let makeId: undefined;
@@ -8,6 +10,8 @@
 	let year: undefined;
 
 	let results: Vehicle[] = [];
+
+	$: console.log({ locationId, year });
 
 	const handleSubmit = async () => {
 		try {
@@ -23,6 +27,11 @@
 	};
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
-	<YearSelect bind:value={year} />
-</form>
+<section class="section">
+	<article class="container">
+		<form class="form" on:submit|preventDefault={handleSubmit}>
+			<LocationSelect bind:value={locationId} />
+			<YearSelect bind:value={year} />
+		</form>
+	</article>
+</section>

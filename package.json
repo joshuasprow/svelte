@@ -79,5 +79,8 @@
 		"test": "start-server-and-test storybook http://localhost:6006 cy:run"
 	},
 	"type": "module",
-	"version": "0.0.1"
+	"version": "0.0.1",
+	"dependencies": {
+		"bulma": "^0.9.3"
+	}
 }
