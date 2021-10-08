@@ -13,7 +13,7 @@
 	<div class="control">
 		<div class="select">
 			<select class="year-select" bind:value name="year-select">
-				<option label="select year" default />
+				<option label="Select Year" default />
 				{#each Array(102) as _, i}
 					<option label={getYear(i)} value={getYear(i)} />
 				{/each}

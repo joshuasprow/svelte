@@ -12,11 +12,11 @@
 </script>
 
 <div class="field">
-	<label class="label" for="year-select">Location*</label>
+	<label class="label" for="location-select">Location*</label>
 	<div class="control">
 		<div class="select">
 			<select class="location-select" bind:value name="location-select">
-				<option label="select location" default />
+				<option label="Select Location" default />
 				{#each options as option}
 					<option label={option.name} value={option.id} />
 				{/each}

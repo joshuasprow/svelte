@@ -3,6 +3,7 @@
 	import { fetchInventory, Vehicle } from '$lib/utils/fetch-inventory';
 	import YearSelect from '$lib/vehicle-search/YearSelect.svelte';
 	import LocationSelect from './LocationSelect.svelte';
+	import MakeSelect from './MakeSelect.svelte';
 
 	let locationId: undefined;
 	let makeId: undefined;
@@ -11,7 +12,7 @@
 
 	let results: Vehicle[] = [];
 
-	$: console.log({ locationId, year });
+	$: console.log({ locationId, makeId, year });
 
 	const handleSubmit = async () => {
 		try {
@@ -31,6 +32,7 @@
 	<article class="container">
 		<form class="form" on:submit|preventDefault={handleSubmit}>
 			<LocationSelect bind:value={locationId} />
+			<MakeSelect bind:value={makeId} />
 			<YearSelect bind:value={year} />
 		</form>
 	</article>
