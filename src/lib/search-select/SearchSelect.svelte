@@ -1,15 +1,11 @@
 <script lang="ts">
-	import Dropdown from './Dropdown.svelte';
-	import DropdownItem from './DropdownItem.svelte';
 	import Input from './Input.svelte';
-	import type { Visibility } from './types';
-	import Wrapper from './Wrapper.svelte';
+	import { active } from './stores';
 
 	export let options: { name: string; value: number }[] = [];
 
 	let search = '';
 	let selected: number[] = [];
-	let visibility: Visibility = 'hidden';
 
 	const match = (name: string) => {
 		const parsedSearch = search.replace(/\W|_/g, '').toLowerCase();
@@ -23,16 +19,26 @@
 	};
 
 	$: filtered = options.filter((o) => match(o.name));
-
-	function handleClick(id: number) {
-		if (selected.includes(id)) {
-			selected = selected.filter((s) => s !== id);
-		} else {
-			selected[selected.length] = id;
-		}
-	}
 </script>
 
+<div class="dropdown" class:is-active={$active}>
+	<div class="dropdown-trigger">
+		<Input bind:value={search} />
+	</div>
+	<div class="dropdown-menu" id="dropdown-menu" role="menu">
+		<div class="dropdown-content">
+			<!-- <a href="#" class="dropdown-item"> Dropdown item </a>
+			<a class="dropdown-item"> Other dropdown item </a>
+			<a href="#" class="dropdown-item is-active">
+				Active dropdown item
+			</a>
+			<a href="#" class="dropdown-item"> Other dropdown item </a>
+			<hr class="dropdown-divider" />
+			<a href="#" class="dropdown-item"> With a divider </a> -->
+		</div>
+	</div>
+</div>
+<!-- 
 <Wrapper bind:visibility>
 	<Input bind:value={search} bind:visibility />
 	<Dropdown bind:visibility>
@@ -44,4 +50,4 @@
 			/>
 		{/each}
 	</Dropdown>
-</Wrapper>
+</Wrapper> -->

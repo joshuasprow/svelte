@@ -4,16 +4,16 @@
 	export let visibility: Visibility = 'hidden';
 </script>
 
-<div class="dropdown" style="--visibility: {visibility};">
-	<ul class="dropdown-list">
+<div class="dropdown" class:is-active={visibility !== 'hidden'}>
+	imadropdown
+	<!-- <ul class="dropdown-list">
 		<slot />
-	</ul>
+	</ul> -->
 </div>
 
 <style>
 	.dropdown {
 		position: relative;
-		visibility: var(--visibility, 'visible');
 		margin: auto;
 		width: 145px;
 	}
