@@ -1,31 +1,21 @@
 <script lang="ts">
 	import Field from './Field.svelte';
+	import Select from './Select.svelte';
 
-	export let value = undefined;
+	const name = 'location-select';
 
 	const options = [
-		{ id: 0, name: 'All' },
-		{ id: 2, name: 'Austin' },
-		{ id: 3, name: 'Lubbock' },
-		{ id: 4, name: 'Budget' },
-		{ id: 5, name: 'San Antonio' },
-		{ id: 8, name: 'Late Model' },
+		{ name: 'All', value: 0 },
+		{ name: 'Austin', value: 2 },
+		{ name: 'Lubbock', value: 3 },
+		{ name: 'Budget', value: 4 },
+		{ name: 'San Antonio', value: 5 },
+		{ name: 'Late Model', value: 8 },
 	];
+
+	export let value = options[0].value;
 </script>
 
 <Field label="Location*" name="location-select">
-	<div class="select">
-		<select class="location-select" bind:value name="location-select">
-			<option label="Select Location" default />
-			{#each options as option}
-				<option label={option.name} value={option.id} />
-			{/each}
-		</select>
-	</div>
+	<Select {name} {options} on:change={(v) => (value = v.detail)} />
 </Field>
-
-<style>
-	.location-select {
-		width: 150px;
-	}
-</style>

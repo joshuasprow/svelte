@@ -1,40 +1,31 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Field from './Field.svelte';
+	import Select from './Select.svelte';
 
-	export let value = undefined;
+	export let value: number;
 
 	interface Make {
 		id: number;
 		name: string;
 	}
 
-	let makes: Make[] = [];
+	const name = 'make-select';
+
+	let options: { name: string; value: number }[] = [];
 
 	onMount(async () => {
 		try {
 			const res = await fetch(`https://api.wrenchapart.com/makes`);
-			makes = await res.json();
+			const makes: Make[] = await res.json();
+
+			options = makes.map((m) => ({ name: m.name, value: m.id }));
 		} catch (e) {
 			console.error(e);
 		}
 	});
 </script>
 
-<!-- svelte-ignore missing-declaration -->
-<Field label="Make*" name="make-select">
-	<div class="select">
-		<select class="make-select" bind:value name="make-select">
-			<option label="Select Make" default />
-			{#each makes as make}
-				<option label={make.name} value={make.id} />
-			{/each}
-		</select>
-	</div>
+<Field label="Make*" {name}>
+	<Select {name} {options} on:change={(v) => (value = v.detail)} />
 </Field>
-
-<style>
-	.make-select {
-		width: 150px;
-	}
-</style>

@@ -6,6 +6,6 @@
 <div class="field">
 	<label class="label" for={name}>{label}</label>
 	<div class="control">
-		<slot name="control" />
+		<slot />
 	</div>
 </div>
