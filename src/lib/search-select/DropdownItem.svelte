@@ -1,14 +1,16 @@
-<script>
+<script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
 	export let item;
 	export let selected;
 
 	const dispatch = createEventDispatcher();
-	const click = () => dispatch('click');
-	const keydown = (e) => {
-		if (e.key === ' ' || e.key === 'Enter') {
-			click();
+
+	const handleClick = () => dispatch('click');
+
+	const handleKeydown = (event: KeyboardEvent) => {
+		if (event.key === ' ' || event.key === 'Enter') {
+			handleClick();
 		}
 	};
 </script>
@@ -17,8 +19,8 @@
 	class="item"
 	value={item.id}
 	tabIndex={0}
-	on:click={click}
-	on:keydown={keydown}
+	on:click={handleClick}
+	on:keydown={handleKeydown}
 >
 	{#if selected}
 		<div class="chip" id={item.id}>
@@ -35,6 +37,7 @@
 		border-style: solid;
 		border-width: 2px;
 	}
+
 	li:hover {
 		cursor: pointer;
 	}

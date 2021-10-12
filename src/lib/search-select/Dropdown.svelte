@@ -1,8 +1,10 @@
-<script>
-	export let visibility = 'hidden';
+<script lang="ts">
+	import type { Visibility } from './types';
+
+	export let visibility: Visibility = 'hidden';
 </script>
 
-<div class="dropdown" style="visibility: {visibility}">
+<div class="dropdown" style="--visibility: {visibility};">
 	<ul class="dropdown-list">
 		<slot />
 	</ul>
@@ -11,6 +13,7 @@
 <style>
 	.dropdown {
 		position: relative;
+		visibility: var(--visibility, 'visible');
 		margin: auto;
 		width: 145px;
 	}

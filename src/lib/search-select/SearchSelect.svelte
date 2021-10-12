@@ -2,13 +2,14 @@
 	import Dropdown from './Dropdown.svelte';
 	import DropdownItem from './DropdownItem.svelte';
 	import Input from './Input.svelte';
+	import type { Visibility } from './types';
 	import Wrapper from './Wrapper.svelte';
 
-	export let options = [];
+	export let options: { name: string; value: number }[] = [];
 
 	let search = '';
-	let selected = [];
-	let visibility = 'hidden';
+	let selected: number[] = [];
+	let visibility: Visibility = 'hidden';
 
 	const match = (name: string) => {
 		const parsedSearch = search.replace(/\W|_/g, '').toLowerCase();
@@ -23,11 +24,11 @@
 
 	$: filtered = options.filter((o) => match(o.name));
 
-	function handleClick(itemId) {
-		if (selected.includes(itemId)) {
-			selected = selected.filter((s) => s !== itemId);
+	function handleClick(id: number) {
+		if (selected.includes(id)) {
+			selected = selected.filter((s) => s !== id);
 		} else {
-			selected[selected.length] = itemId;
+			selected[selected.length] = id;
 		}
 	}
 </script>
@@ -37,9 +38,9 @@
 	<Dropdown bind:visibility>
 		{#each filtered as item}
 			<DropdownItem
-				selected={selected.includes(item.id)}
+				selected={selected.includes(item.value)}
 				{item}
-				on:click={() => handleClick(item.id)}
+				on:click={() => handleClick(item.value)}
 			/>
 		{/each}
 	</Dropdown>

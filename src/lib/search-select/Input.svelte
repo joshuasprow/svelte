@@ -1,6 +1,8 @@
-<script>
-	export let value;
-	export let visibility;
+<script lang="ts">
+	import type { Visibility } from './types';
+
+	export let value: string;
+	export let visibility: Visibility;
 
 	function onFocus() {
 		visibility = 'revert';
