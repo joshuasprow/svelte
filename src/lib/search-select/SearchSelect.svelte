@@ -5,12 +5,13 @@
 	import type { Option } from './types';
 
 	export let options: Option[] = [];
+	export let selected: Option['value'][] = [];
 
 	const handleClickOutside = () => active.set(false);
 </script>
 
 <div use:outside on:close={handleClickOutside}>
-	<Dropdown {options} />
+	<Dropdown {options} {selected} />
 </div>
 <!-- 
 <Wrapper bind:visibility>
