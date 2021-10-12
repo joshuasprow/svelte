@@ -1,11 +1,23 @@
 type Param = 'locationId' | 'makeId' | 'modelId' | 'year';
 
-export type FetchInventoryParams = { [param in Param]?: string } & {
-	modelIds?: string[];
+export type FetchInventoryParams = { [param in Param]?: number } & {
+	modelIds?: number[];
 };
+
+interface Make {
+	id: number;
+	name: string;
+}
+
+interface Model extends Make {
+	make_id: number;
+}
 
 export interface Vehicle {
 	vin: string;
+	make: Make;
+	model: Model;
+	modelYear: number;
 }
 
 const fetchInventoryChunk = async ({
@@ -16,10 +28,10 @@ const fetchInventoryChunk = async ({
 }: FetchInventoryParams): Promise<Vehicle[]> => {
 	const params = new URLSearchParams();
 
-	if (locationId) params.set('locationId', locationId);
-	if (makeId) params.set('makeId', makeId);
-	if (modelId) params.set('modelId', modelId);
-	if (year) params.set('year', year);
+	if (locationId) params.set('locationId', locationId.toString());
+	if (makeId) params.set('makeId', makeId.toString());
+	if (modelId) params.set('modelId', modelId.toString());
+	if (year) params.set('year', year.toString());
 
 	const url = `https://api.wrenchapart.com/vehicles?${params.toString()}`;
 

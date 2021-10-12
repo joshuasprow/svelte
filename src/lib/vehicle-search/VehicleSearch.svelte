@@ -5,14 +5,23 @@
 	import LocationSelect from './LocationSelect.svelte';
 	import MakeSelect from './MakeSelect.svelte';
 
-	let locationId: undefined;
-	let makeId: undefined;
-	let modelIds = [];
-	let year: undefined;
+	let locationId: number | undefined;
+	let makeId: number | undefined;
+	let modelIds: number[] = [];
+	let year: number | undefined;
 
 	let results: Vehicle[] = [];
 
 	$: console.log({ locationId, makeId, year });
+
+	$: console.table(
+		results.map(({ vin, make, model, modelYear }) => ({
+			vin,
+			make: make.name,
+			model: model.name,
+			year: modelYear,
+		}))
+	);
 
 	const handleSubmit = async () => {
 		try {
@@ -34,6 +43,11 @@
 			<LocationSelect bind:value={locationId} />
 			<MakeSelect bind:value={makeId} />
 			<YearSelect bind:value={year} />
+			<button
+				class="button is-info"
+				disabled={!makeId || !locationId}
+				type="submit">Search</button
+			>
 		</form>
 	</article>
 </section>
