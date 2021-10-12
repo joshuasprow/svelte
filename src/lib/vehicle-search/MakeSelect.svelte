@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Field from './Field.svelte';
 
 	export let value = undefined;
 
@@ -20,19 +21,17 @@
 	});
 </script>
 
-<div class="field">
-	<label class="label" for="make-select">Make*</label>
-	<div class="control">
-		<div class="select">
-			<select class="make-select" bind:value name="make-select">
-				<option label="Select Make" default />
-				{#each makes as make}
-					<option label={make.name} value={make.id} />
-				{/each}
-			</select>
-		</div>
+<!-- svelte-ignore missing-declaration -->
+<Field label="Make*" name="make-select">
+	<div class="select">
+		<select class="make-select" bind:value name="make-select">
+			<option label="Select Make" default />
+			{#each makes as make}
+				<option label={make.name} value={make.id} />
+			{/each}
+		</select>
 	</div>
-</div>
+</Field>
 
 <style>
 	.make-select {

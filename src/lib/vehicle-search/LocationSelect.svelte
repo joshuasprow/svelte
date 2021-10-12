@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Field from './Field.svelte';
+
 	export let value = undefined;
 
 	const options = [
@@ -11,19 +13,16 @@
 	];
 </script>
 
-<div class="field">
-	<label class="label" for="location-select">Location*</label>
-	<div class="control">
-		<div class="select">
-			<select class="location-select" bind:value name="location-select">
-				<option label="Select Location" default />
-				{#each options as option}
-					<option label={option.name} value={option.id} />
-				{/each}
-			</select>
-		</div>
+<Field label="Location*" name="location-select">
+	<div class="select">
+		<select class="location-select" bind:value name="location-select">
+			<option label="Select Location" default />
+			{#each options as option}
+				<option label={option.name} value={option.id} />
+			{/each}
+		</select>
 	</div>
-</div>
+</Field>
 
 <style>
 	.location-select {
