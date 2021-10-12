@@ -4,13 +4,13 @@ export type FetchInventoryParams = { [param in Param]?: number } & {
 	modelIds?: number[];
 };
 
-interface Make {
+export interface Make {
 	id: number;
 	name: string;
 }
 
-interface Model extends Make {
-	make_id: number;
+export interface Model extends Make {
+	makeId: number;
 }
 
 export interface Vehicle {

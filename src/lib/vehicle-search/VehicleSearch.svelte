@@ -4,6 +4,7 @@
 	import YearSelect from '$lib/vehicle-search/YearSelect.svelte';
 	import LocationSelect from './LocationSelect.svelte';
 	import MakeSelect from './MakeSelect.svelte';
+	import ModelSelect from './ModelSelect.svelte';
 
 	let locationId: number | undefined;
 	let makeId: number | undefined;
@@ -42,6 +43,7 @@
 		<form class="form" on:submit|preventDefault={handleSubmit}>
 			<LocationSelect bind:value={locationId} />
 			<MakeSelect bind:value={makeId} />
+			<ModelSelect {makeId} {modelIds} />
 			<YearSelect bind:value={year} />
 			<button
 				class="button is-info"

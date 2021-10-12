@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	export let disabled = false;
+	export let loading = false;
 	export let options: { name: string; value: number }[] = [];
 	export let name: string;
 
@@ -14,8 +16,8 @@
 		dispatch('change', parseInt(currentTarget.value, 10));
 </script>
 
-<div class="select">
-	<select on:change={handleChange} {name}>
+<div class="select" class:is-loading={loading}>
+	<select {disabled} on:change={handleChange} {name}>
 		{#each options as option}
 			<option label={option.name} value={option.value} />
 		{/each}
