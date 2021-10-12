@@ -1,34 +1,31 @@
 <script lang="ts">
-	import type { Visibility } from './types';
+	import Input from './Input.svelte';
+	import { active, search } from './stores';
+	import type { Option } from './types';
 
-	export let visibility: Visibility = 'hidden';
+	export let options: Option[];
+
+	const normalize = (s: string) => s.replace(/\W|_/g, '').toLowerCase();
+
+	const filter = (_search: string, _name: string) => {
+		const s = normalize(_search);
+		const n = normalize(_name);
+
+		return n.includes(s);
+	};
+
+	$: filtered = options.filter((o) => filter($search, o.name));
 </script>
 
-<div class="dropdown" class:is-active={visibility !== 'hidden'}>
-	imadropdown
-	<!-- <ul class="dropdown-list">
-		<slot />
-	</ul> -->
+<div class="dropdown" class:is-active={$active}>
+	<div class="dropdown-trigger">
+		<Input />
+	</div>
+	<div class="dropdown-menu" id="dropdown-menu" role="menu">
+		<div class="dropdown-content">
+			{#each filtered as option}
+				<span class="dropdown-item">{option.name}</span>
+			{/each}
+		</div>
+	</div>
 </div>
-
-<style>
-	.dropdown {
-		position: relative;
-		margin: auto;
-		width: 145px;
-	}
-
-	.dropdown-list {
-		position: absolute;
-		width: 145px;
-		list-style-type: none;
-		padding-inline-start: 0;
-		z-index: 10;
-		background-color: white;
-		margin-top: 0px;
-		max-height: 120px;
-		overflow-y: scroll;
-		border-style: solid;
-		border-width: 2px;
-	}
-</style>

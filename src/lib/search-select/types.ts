@@ -1,1 +1,4 @@
-export type Visibility = 'hidden' | 'revert';
+export interface Option {
+	name: string;
+	value: number;
+}

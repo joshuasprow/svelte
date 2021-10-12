@@ -1,42 +1,16 @@
 <script lang="ts">
-	import Input from './Input.svelte';
+	import { outside } from '$lib/utils/outside';
+	import Dropdown from './Dropdown.svelte';
 	import { active } from './stores';
+	import type { Option } from './types';
 
-	export let options: { name: string; value: number }[] = [];
+	export let options: Option[] = [];
 
-	let search = '';
-	let selected: number[] = [];
-
-	const match = (name: string) => {
-		const parsedSearch = search.replace(/\W|_/g, '').toLowerCase();
-		const parsedSelectable = name.replace(/\W|_/g, '').toLowerCase();
-
-		if (parsedSelectable.includes(parsedSearch)) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	$: filtered = options.filter((o) => match(o.name));
+	const handleClickOutside = () => active.set(false);
 </script>
 
-<div class="dropdown" class:is-active={$active}>
-	<div class="dropdown-trigger">
-		<Input bind:value={search} />
-	</div>
-	<div class="dropdown-menu" id="dropdown-menu" role="menu">
-		<div class="dropdown-content">
-			<!-- <a href="#" class="dropdown-item"> Dropdown item </a>
-			<a class="dropdown-item"> Other dropdown item </a>
-			<a href="#" class="dropdown-item is-active">
-				Active dropdown item
-			</a>
-			<a href="#" class="dropdown-item"> Other dropdown item </a>
-			<hr class="dropdown-divider" />
-			<a href="#" class="dropdown-item"> With a divider </a> -->
-		</div>
-	</div>
+<div use:outside on:close={handleClickOutside}>
+	<Dropdown {options} />
 </div>
 <!-- 
 <Wrapper bind:visibility>

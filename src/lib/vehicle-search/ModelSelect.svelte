@@ -1,9 +1,7 @@
 <script lang="ts">
 	import SearchSelect from '$lib/search-select/SearchSelect.svelte';
-
 	import type { Model } from '$lib/utils/fetch-inventory';
 	import Field from './Field.svelte';
-	import Select from './Select.svelte';
 
 	export let makeId: number | undefined;
 	export let modelIds: number[] = [];
