@@ -19,8 +19,8 @@
 			);
 
 			models = await res.json();
-		} catch (e) {
-			console.error(e);
+		} catch (error) {
+			console.error(error);
 		} finally {
 			loading = false;
 		}
@@ -36,5 +36,3 @@
 <Field label="Models" name="model-select">
 	<Select disabled={!makeId} {loading} name="model-select" {options} />
 </Field>
-
-<pre>{JSON.stringify(modelIds)}</pre>
